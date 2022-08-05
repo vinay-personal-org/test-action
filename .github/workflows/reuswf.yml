@@ -26,6 +26,6 @@ jobs:
       - name: Print eventname 
         run: echo "event is ${{github.event_name}} and repo_id is ${{github.repository_id}}"
       # Upload a file to AWS s3
-      - name:  Copy sample txt file to s3
+      - name:  Copy my.txt file to s3
         run: |
-          aws s3 cp ./package.json s3://${{ env.BUCKET_NAME }}/
+          aws s3 cp ./my.txt s3://${{ env.BUCKET_NAME }}/
