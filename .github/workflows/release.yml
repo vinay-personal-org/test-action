@@ -1,0 +1,18 @@
+name: 'publish-action'
+on: # rebuild any PRs and main branch changes
+  release:
+    types: [created]
+
+jobs:
+  package-and-publish: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out!
+        uses: actions/checkout@v3
+       
+        
+      - name: Publish action 
+        uses: actions-on-packages/package-action@ruchika-jain/aop-test-pkg-action
+#        with: 
+#            path: 'dist/'
+   
