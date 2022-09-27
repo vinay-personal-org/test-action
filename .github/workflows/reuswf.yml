@@ -18,6 +18,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Print workflow name 
         run: echo "wf is ${{github.job_workflow_ref}}"
+      - name: Generate ID Token 
+        run: |
+          IDTOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=github" -H "Accept: application/json; api-version=2.0" -H "Content-Type: application/json"  | jq -r '.value')
+          jwtd() {
+            if [[ -x $(command -v jq) ]]; then
+                echo "Token : ${1}"
+                jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+                echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+            fi
+          }
+          jwtd $IDTOKEN
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
