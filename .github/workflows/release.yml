@@ -12,7 +12,7 @@ jobs:
        
         
       - name: Publish action 
-        uses: actions-on-packages/package-action@ruchika-jain/aop-test-pkg-action
+        uses: actions-on-packages/package-action@0.4.1
 #        with: 
 #            path: 'dist/'
    
